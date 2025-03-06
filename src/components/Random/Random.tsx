@@ -41,13 +41,13 @@ export const Random = () => {
     <>
     {execution ? (<Button variant="filled" style={{marginLeft: 20, marginTop: -20}} radius="xl" onClick={() => setExecution(false)}>{"戻る"}</Button>) : <></>}
 
-    <Group justify="center" style={{marginTop: "280px"}} ml="xl" mr="xl">
+    <Group justify="center" style={{marginTop: "40vh"}} ml="xl" mr="xl">
 
       {execution ? 
         (
           <>
             <Title style={{fontSize: resultSize, marginTop: "-400px"}}><BiCaretUp size={resultSize} />{result.top}<BiCaretUp size={resultSize} /></Title>
-            <Title style={{fontSize: resultSize, marginTop: "160px"}}><BiCaretDown size={resultSize} />{result.buttom}<BiCaretDown size={resultSize} /></Title>
+            <Title style={{fontSize: resultSize, marginTop: "40vh"}}><BiCaretDown size={resultSize} />{result.buttom}<BiCaretDown size={resultSize} /></Title>
           </>
         ) : (
         <Button
