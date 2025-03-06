@@ -1,4 +1,4 @@
-import { Button, Flex, Group, useMantineColorScheme } from '@mantine/core';
+import { Group, useMantineColorScheme } from '@mantine/core';
 import { useToggle } from '@mantine/hooks';
 import { Switch } from '@mantine/core';
 import { IconSun, IconMoonStars } from '@tabler/icons-react';

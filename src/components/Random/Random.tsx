@@ -3,8 +3,12 @@ import { Button, Group, Title } from '@mantine/core';
 import { useColorScheme } from '@mantine/hooks';
 import { BiSolidChevronLeft } from "react-icons/bi";
 import { BiSolidChevronRight } from "react-icons/bi";
-import { BiCaretUp } from "react-icons/bi";
-import { BiCaretDown } from "react-icons/bi";
+import { GiAxeSword } from "react-icons/gi";
+import { GiCheckedShield } from "react-icons/gi";
+import { CloseButton } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
+import { Grid } from '@mantine/core';
+import { useViewportSize } from '@mantine/hooks';
 
 export const Random = () => {
   const [execution, setExecution] = useState<boolean>(false);
@@ -17,11 +21,13 @@ export const Random = () => {
   const interval = 2000;
   const iconSize = 70;
   const resultSize = "4rem"
-
+  const isMobile = useMediaQuery(`(max-width: 590px)`);
+  const { height, width } = useViewportSize();
+  
   useEffect(() => {
     if (execution) {
       const random = Math.floor(Math.random()*2 + 1)
-      setResult({top: random === 1 ? "先": "後", buttom: random === 1 ? "後": "先"})
+      setResult({top: random === 1 ? "先攻": "後攻", buttom: random === 1 ? "後攻": "先攻"})
     }
 
   }, [execution])
@@ -39,20 +45,56 @@ export const Random = () => {
 
   return (
     <>
-    {execution ? (<Button variant="filled" style={{marginLeft: 20, marginTop: -20}} radius="xl" onClick={() => setExecution(false)}>{"戻る"}</Button>) : <></>}
+    {execution ? (
+      <CloseButton 
+        style={{marginLeft: 10, marginTop: -20}} 
+        size="xl"
+        onClick={() => setExecution(false)}
+      >
+      </CloseButton>
+    ) : <></>}
 
-    <Group justify="center" style={{marginTop: "40vh"}} ml="xl" mr="xl">
+    <Group justify="center">
 
       {execution ? 
         (
-          <>
-            <Title style={{fontSize: resultSize, marginTop: "-400px"}}><BiCaretUp size={resultSize} />{result.top}<BiCaretUp size={resultSize} /></Title>
-            <Title style={{fontSize: resultSize, marginTop: "40vh"}}><BiCaretDown size={resultSize} />{result.buttom}<BiCaretDown size={resultSize} /></Title>
-          </>
+          <Grid>
+            <Grid.Col></Grid.Col>
+            <Grid.Col>
+              <Title 
+                style={{
+                  fontSize: resultSize,
+                  transform: "scale(-1.5)",
+                  textAlign: "center"
+                }}
+              >
+                <GiAxeSword size={resultSize} />
+                  {result.top}
+                <GiCheckedShield size={resultSize} />
+              </Title>
+              <Title 
+                style={{
+                  fontSize: resultSize, 
+                  transform: "scale(1.5)", 
+                  marginTop: height > 730 ? height > 1000 ? height > 1200  ? "57rem" : "40rem" : "30rem" : "20rem",
+                  textAlign: "center"
+                }}
+                >
+                  <GiAxeSword size={resultSize} />
+                    {result.buttom}
+                  <GiCheckedShield size={resultSize} />
+              </Title>
+            </Grid.Col>
+            <Grid.Col></Grid.Col>
+          </Grid>
         ) : (
         <Button
           style={{
-            color: colorScheme === "dark" ? "white" : "darkgray"
+            color: colorScheme === "dark" ? "white" : "darkgray",
+            marginRight: 10,
+            marginLeft: 10,
+            marginTop: "20rem"
+
           }}
           leftSection={<BiSolidChevronLeft size={iconSize} />}
           rightSection={<BiSolidChevronRight size={iconSize} />}
