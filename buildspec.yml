@@ -1,6 +1,13 @@
-version: 0.2
+version: 0.3
 
 phases:
-  post_build:
+  install:
     commands:
-      - aws s3 sync --exact-timestamps ./ s3://random-select
+      - npm install
+  build:
+    commands:
+      - npm run build
+artifacts:
+  base-directory: build
+  files:
+    - '**/*'
